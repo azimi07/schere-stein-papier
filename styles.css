@@ -1,0 +1,122 @@
+
+
+body {
+text-align: center;
+
+  background-color: black;
+  background-image: url(hintergrund.webp);
+  background-size: 1800px;
+  background-repeat: no-repeat;
+ background-position-y: -100px;
+ background-position-x: center;
+
+}
+
+div {
+
+ font-size: 200px;
+}
+
+
+button {
+ /* Basis-Styling für den krisförmigen Button */
+
+background-color: black; /* Hintergrundfarbe */
+border-color: white;
+border-width: 2px;
+color: white;
+  width: 160px;
+  text-align: center; /* Textzentrierung */
+  display: inline-block; /* Inline-Block-Element */
+  font-size: 30px; 
+  padding: 20px;/* Schriftgröße */
+  line-height: 124px; /* Liniehöhe zum Zentrieren des Textes */
+  cursor: pointer; /* Mauszeiger beim Hover */
+  border-radius: 50%; /* Runde Ecken (Kreis) */
+  transition: background-color 0.3s; /* Übergang für Hintergrundfarbe */
+  position: relative;
+
+}
+
+/* Hover-Effekt */
+button:hover  {
+ width: 170px;
+ height: 180px;
+ filter: drop-shadow(0 0 10px white);
+ transition: ease-in-out  0.2ms;
+ 
+
+}
+
+img {
+  z-index: -1;
+}
+
+ p{
+  color: white;
+ }
+
+#titel {
+  margin-top: 120px;
+  font-size: 100px;
+
+  font-style:oblique;
+
+  color: #fff;
+  text-shadow: 
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #ff00ff,
+      0 0 30px #ff00ff,
+      0 0 40px #ff00ff,
+      0 0 55px #ff00ff,
+      0 0 75px #ff00ff;
+}
+
+
+button {
+
+  margin-top: 130px;
+  text-shadow: 
+  0 0 10px #fff,
+  0 0 15px #fff,
+  0 0 20px #fff,
+  0 0 30px #9f1f9f,
+  0 0 40px #6b1e6b,
+  0 0 50px #792679,
+  0 0 70px #843784,
+  0 0 90px #9b3e9b;
+}
+#spruch{
+  font-size: 30px;
+  font-style:oblique;
+  margin-top: -30px;
+  color: #fff;
+  text-shadow: 
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #fff,
+      0 0 30px #9f1f9f,
+      0 0 40px #6b1e6b,
+      0 0 50px #792679,
+      0 0 70px #843784,
+      0 0 90px #9b3e9b;
+}
+
+#resetButton {
+  background-color: rgb(19, 1, 19);
+  color: white;
+  border-radius: 5px;
+ font-size: 20px;
+ block-size: auto;
+  font-size: 20px;
+padding: 0px;
+  text-align: center;
+  line-height: center;
+ margin-top: 80px;
+}
+#resetButton:hover {
+  filter: drop-shadow(0 0 40px red);
+}
+

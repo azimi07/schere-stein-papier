@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Document</title>
+  
+</head>
+<body>
+
+
+   <p id="titel">DAS SPIEL</p>
+   <p id="spruch"> Entscheide dich!</p>
+
+<div> <!-- Button bereich 3 buttons in der mitte --> 
+   <button onclick="
+
+   playGame('Schere'); /*eine Funktion die unten gemacht wurde und hier benutzt wird */
+
+    
+   ">Schere</button>
+
+   <button onclick="
+
+
+ playGame('Stein');
+   
+  ">Stein</button>
+
+   <button onclick="
+
+
+  playGame('Papier');
+
+   
+   " >Papier</button>
+
+</div>
+ <!--auch ein button aber ausserhalb von div damit es nicht in der selben spalte ist, sondern darunter-->
+ <button id="resetButton" onclick="
+  resetScore();
+">
+  RESET
+ </button>
+
+</body>
+
+<script> /* hier kommt unser code rein, hier wird richtig programmiert, sachen wie funktionen oder interaktivität */ 
+  let score= JSON.parse(localStorage.getItem('score'))
+  || {
+    gewonnen: 0 , 
+    verloren: 0 ,
+    unentschieden:0
+  }; /* JSON.parse(localStorage.getItem('score'))
+  json parse wandelt json code bzw. string code in javascript um und localstorage ist unser speicher, getitem holt unsere daten aus dem speicher raus, score heissen gespeicherten daten. die beiden striche ersetzen eine if or else funktion, somit wird der zweite fall eintreten, in dem alle werte auf 0 gesetzt worden sind, wenn der erste Fall nicht stimmt bzw. unser Speicher leer ist, */
+
+
+      /*erste Funktion */ 
+function playGame (playerMove) {
+  const computerMove = pickComputerMove();
+  let result = '' /* eine freie Variabel, das heisst sie kann und wird jeder zeit geändert, abhänging vom Spielerzug */ 
+
+    if (playerMove === 'Papier') {
+  if (computerMove === 'Schere') {
+       result ='Du hast verloren'
+     } else if (computerMove === 'Stein') {
+      result = 'Du hast gewonnen'
+     } else if (computerMove === 'Papier') {
+      result = 'Unentschieden'
+     }
+    } else if (playerMove === 'Stein') {
+   if (computerMove === 'Schere') {
+     result ='Du hast gewonnen'
+   } else if (computerMove === 'Stein') {
+    result = 'Unentschieden'
+   } else if (computerMove === 'Papier') {
+    result = 'Du hast verloren'
+   }
+
+    } else if (playerMove === 'Schere') {
+      if (computerMove === 'Schere') {
+       result ='Unentschieden'
+     } else if (computerMove === 'Stein') {
+      result = 'Du hast verloren'
+     } else if (computerMove === 'Papier') {
+      result = 'Du hast gewonnen'
+     }
+    }
+    /*das waren unsere if or else funktionen, da wird der result abhängig davon was der spieler und das computer wählen geändert, die Werte, wie schere stein papier, werden hier gleich gestellt um zugucken in welchem fall was als result gespeicher wird, zum beispiel 
+    if (playermove === 'schere') [wenn der Spieler schere wählt] {if (computermove === stein) { result = 'du hast verloren' }
+    so wird das weiter gemacht mit allen möglichkeiten, sie alle werden mit dem ersten spielerzug, in dem Falle Schere, verglichen. */
+    
+
+    if (result === 'Du hast gewonnen') {
+      score.gewonnen += 1;
+    } else if (result === 'Du hast verloren') {
+      score.verloren += 1;
+    } else if (result === 'Unentschieden') {
+      score.unentschieden += 1;
+    }
+
+   /* hier gucken wir uns den davor ausgewählten inhalt für result an, der uns sagt ob wir gewonnen oder verloren haben, und je nachdem was zutrifft, wird der score geändert  += steht für plus 1, hier wird eine einfache if or else funktion verwendet */
+
+   localStorage.setItem('score' , JSON.stringify(score)); 
+   /* hier haben wir das gleiche wie ganz oben bei localstorage, der einzige unterschied ist, dass wir hier die oben herrausgearbeiteten Daten in den Storage speicher, damit sie später, wie oben, aufgerufen werden können. 
+   setItem speichert die datei, 'score' ist ein selbstgenannter name für unsere daten, den wir später brauchen, um unsere Daten aufzurufen.
+   json.stringify verwandelt unser javascript code in json code bzw. string code um, damit sie in Storage gespeichert werden kann, denn ganz wichtig: local storage speichert nur 'string' code und in den extra klammern, kommt das rein, was wir in string verwandeln möchten, damit sie anschliessend in storage gespeichert wird. */
+ 
+     alert ( `Du hast ${playerMove} gewählt. Der Computer hat ${computerMove} gewählt. ${result}.
+     Gewonnen:${score.gewonnen}, Verloren:${score.verloren}, Unentschieden:${score.unentschieden}`)
+
+     /* hier benachrichtigen wir den spieler, ob er gewonnen oder verloren hat, dabei benutzen wir die alert funktion, die benachrichtigt die spieler mit einem alert, in dem dann drin steht was nun Sache ist. 
+     ${} mitten im Text ist wie eine Lücke, die dann von den davor stehenden funktionen ausgefüllt wird. zum beispiel da der playermove immer unteschiedlich ist und wir deswegen auch oben eine funktion dafür haben, können wir hier einfach die Lücke damit ausfüllen und müsse nnicht alle möglichkeiten, die eintreffen könnten extra aufschreiben und können einfach einen lückentext schreibt, der dann von unseren Variabeln ausgefüllt wird. */
+ }
+
+  function pickComputerMove() {
+    const randomNumber= Math.random();
+
+
+    let computerMove = '';
+
+    if (randomNumber >= 0 && randomNumber < 1 / 3) {
+      computerMove = 'Stein';
+    } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+      computerMove = 'Papier';
+    } else if (randomNumber >= 2 / 3 && randomNumber < 1 ) {
+      computerMove = 'Schere';
+    }
+    
+    return computerMove;
+  }
+  /* hier haben wir wieder eine funktion und zwar für den Computer und welchen Move der Computer macht, hier programmieren wir unseren zufallsprinzip.
+  erst brauchen wir eine zufällige basis an der wir dann bestimmte bereiche festlegen, dafür benutzen wir eine variabel, die einene zufälligen Wert hat, in diesem Fall haben wir math.random benutzt, diese java funktion kann eine zufällige zahl von 0 bis 1 raussuchen und diesen unserer Variabel geben.
+  dann haben wir eine freie Variabel erstellen und zwar computermove 
+  dann haben wir eine einfache if funktion
+  die sagt welche bereiche von 0 bis 1 was sein soll zum beispiel von 0 bis 0.25 ist stein usw. 
+  anschliessend benutzen wir eine return funktion, der unseren computermove nach aussen bringt, ausserhalb der funktion, denn variabeln, die innerhalb einer funktion erstellt werden können auch nur innerhalb diser funkion benutzt werden, da wir aber den computermove brauchen, um zu sehen ob der spieler gewonnen oder verloren hat, tragen wir nur diesen wert, computermove, aus der funktion raus und zwar mit der return funktion */
+
+
+  function resetScore() {
+    score.gewonnen = 0;
+    score.verloren = 0;
+    score.unentschieden = 0;
+    localStorage.removeItem('score');
+  }
+/* das ist auch wieder eine Funktion und zwar eine einfache. hier sagen wir, dass diese funktion alle unsere Punktzahlen zurücksetzen soll und auch aus dem Speicher löschen soll, dafür wurde removeitem benutzt. */
+
+</script>
+
+</html>
